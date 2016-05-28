@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Form1.cs</title>
+<link rel="stylesheet" type="text/css" href="highlight.css">
+</head>
+<body class="hl">
+<pre class="hl">﻿<span class="hl kwa">using</span> System<span class="hl opt">;</span>
+<span class="hl kwa">using</span> System<span class="hl opt">.</span>Collections<span class="hl opt">.</span>Generic<span class="hl opt">;</span>
+<span class="hl kwa">using</span> System<span class="hl opt">.</span>ComponentModel<span class="hl opt">;</span>
+<span class="hl kwa">using</span> System<span class="hl opt">.</span>Data<span class="hl opt">;</span>
+<span class="hl kwa">using</span> System<span class="hl opt">.</span>Drawing<span class="hl opt">;</span>
+<span class="hl kwa">using</span> System<span class="hl opt">.</span>Linq<span class="hl opt">;</span>
+<span class="hl kwa">using</span> System<span class="hl opt">.</span>Text<span class="hl opt">;</span>
+<span class="hl kwa">using</span> System<span class="hl opt">.</span>Threading<span class="hl opt">.</span>Tasks<span class="hl opt">;</span>
+<span class="hl kwa">using</span> System<span class="hl opt">.</span>Windows<span class="hl opt">.</span>Forms<span class="hl opt">;</span>
+
+<span class="hl kwa">namespace</span> RockPaperScissor
+<span class="hl opt">{</span>
+    <span class="hl kwa">public</span> partial <span class="hl kwa">class</span> Form1 <span class="hl opt">:</span> Form
+    <span class="hl opt">{</span>
+
+        <span class="hl kwb">int</span> npc<span class="hl opt">;</span>
+        <span class="hl kwb">int</span> player<span class="hl opt">;</span>
+        <span class="hl kwb">int</span> sc_player<span class="hl opt">=</span><span class="hl num">0</span><span class="hl opt">;</span>
+        <span class="hl kwb">int</span> sc_npc<span class="hl opt">=</span><span class="hl num">0</span><span class="hl opt">;</span>
+        <span class="hl kwb">int</span> choosen<span class="hl opt">;</span>
+        <span class="hl kwa">private</span> <span class="hl kwb">void</span> <span class="hl kwd">play_npc</span><span class="hl opt">()</span>
+        <span class="hl opt">{</span>
+            <span class="hl slc">// create random number variable</span>
+            Random random <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">Random</span><span class="hl opt">();</span>
+            npc<span class="hl opt">=</span> random<span class="hl opt">.</span><span class="hl kwd">Next</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">);</span>
+
+        <span class="hl opt">}</span> 
+
+
+        <span class="hl kwa">public</span> <span class="hl kwd">Form1</span><span class="hl opt">()</span>
+        <span class="hl opt">{</span>
+            <span class="hl kwd">InitializeComponent</span><span class="hl opt">();</span>
+        <span class="hl opt">}</span>
+
+     
+        <span class="hl kwa">private</span> <span class="hl kwb">void</span> <span class="hl kwd">button1_Click</span><span class="hl opt">(</span><span class="hl kwb">object</span> sender<span class="hl opt">,</span> EventArgs e<span class="hl opt">)</span>
+        <span class="hl opt">{</span>
+
+            <span class="hl kwa">if</span> <span class="hl opt">(</span>comboBox1<span class="hl opt">.</span>Text <span class="hl opt">!=</span> <span class="hl str">&quot;Rock&quot;</span> <span class="hl opt">&amp;&amp;</span> comboBox1<span class="hl opt">.</span>Text <span class="hl opt">!=</span> <span class="hl str">&quot;Paper&quot;</span> <span class="hl opt">&amp;&amp;</span> comboBox1<span class="hl opt">.</span>Text <span class="hl opt">!=</span> <span class="hl str">&quot;Scissor&quot;</span><span class="hl opt">)</span>
+                MessageBox<span class="hl opt">.</span><span class="hl kwd">Show</span><span class="hl opt">(</span><span class="hl str">&quot;Choose an attack style !&quot;</span><span class="hl opt">,</span> <span class="hl str">&quot;Error&quot;</span><span class="hl opt">);</span>
+            <span class="hl kwa">else</span>
+            <span class="hl opt">{</span>
+
+                <span class="hl kwd">play_npc</span><span class="hl opt">();</span>
+
+
+                <span class="hl kwa">if</span> <span class="hl opt">(</span>npc <span class="hl opt">==</span> <span class="hl num">0</span><span class="hl opt">)</span>
+                <span class="hl opt">{</span>
+                    Paper2<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">true</span><span class="hl opt">;</span>
+                    Scissor2<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+                    Rock2<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+                <span class="hl opt">}</span>
+                <span class="hl kwa">if</span> <span class="hl opt">(</span>npc <span class="hl opt">==</span> <span class="hl num">1</span><span class="hl opt">)</span>
+                <span class="hl opt">{</span>
+                    Paper2<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+                    Scissor2<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">true</span><span class="hl opt">;</span>
+                    Rock2<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+                <span class="hl opt">}</span>
+                <span class="hl kwa">if</span> <span class="hl opt">(</span>npc <span class="hl opt">==</span> <span class="hl num">2</span><span class="hl opt">)</span>
+                <span class="hl opt">{</span>
+                    Paper2<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+                    Scissor2<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+                    Rock2<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">true</span><span class="hl opt">;</span>
+                <span class="hl opt">}</span>
+
+                <span class="hl kwa">if</span> <span class="hl opt">(</span>player <span class="hl opt">==</span> npc<span class="hl opt">)</span>
+                <span class="hl opt">{</span>
+                    sc_player<span class="hl opt">++;</span>
+                    sc_npc<span class="hl opt">++;</span>
+                <span class="hl opt">}</span>
+                <span class="hl kwa">if</span> <span class="hl opt">(</span>player <span class="hl opt">==</span> <span class="hl num">0</span> <span class="hl opt">&amp;&amp;</span> npc <span class="hl opt">==</span> <span class="hl num">1</span><span class="hl opt">)</span>
+                    sc_npc<span class="hl opt">++;</span>
+                <span class="hl kwa">if</span> <span class="hl opt">(</span>player <span class="hl opt">==</span> <span class="hl num">0</span> <span class="hl opt">&amp;&amp;</span> npc <span class="hl opt">==</span> <span class="hl num">2</span><span class="hl opt">)</span>
+                    sc_player<span class="hl opt">++;</span>
+                <span class="hl kwa">if</span> <span class="hl opt">(</span>player <span class="hl opt">==</span> <span class="hl num">1</span> <span class="hl opt">&amp;&amp;</span> npc <span class="hl opt">==</span> <span class="hl num">0</span><span class="hl opt">)</span>
+                    sc_player<span class="hl opt">++;</span>
+                <span class="hl kwa">if</span> <span class="hl opt">(</span>player <span class="hl opt">==</span> <span class="hl num">1</span> <span class="hl opt">&amp;&amp;</span> npc <span class="hl opt">==</span> <span class="hl num">2</span><span class="hl opt">)</span>
+                    sc_npc<span class="hl opt">++;</span>
+                <span class="hl kwa">if</span> <span class="hl opt">(</span>player <span class="hl opt">==</span> <span class="hl num">2</span> <span class="hl opt">&amp;&amp;</span> npc <span class="hl opt">==</span> <span class="hl num">0</span><span class="hl opt">)</span>
+                    sc_npc<span class="hl opt">++;</span>
+                <span class="hl kwa">if</span> <span class="hl opt">(</span>player <span class="hl opt">==</span> <span class="hl num">2</span> <span class="hl opt">&amp;&amp;</span> npc <span class="hl opt">==</span> <span class="hl num">1</span><span class="hl opt">)</span>
+                    sc_player<span class="hl opt">++;</span>
+
+                label1<span class="hl opt">.</span>Text <span class="hl opt">=</span> <span class="hl str">&quot;You: &quot;</span> <span class="hl opt">+</span> sc_player<span class="hl opt">.</span><span class="hl kwd">ToString</span><span class="hl opt">();</span>
+                label2<span class="hl opt">.</span>Text <span class="hl opt">=</span> <span class="hl str">&quot;Johnny: &quot;</span> <span class="hl opt">+</span> sc_npc<span class="hl opt">.</span><span class="hl kwd">ToString</span><span class="hl opt">();</span>
+
+                <span class="hl kwa">if</span> <span class="hl opt">(</span>sc_player <span class="hl opt">==</span> <span class="hl num">10</span> <span class="hl opt">||</span> sc_npc <span class="hl opt">==</span> <span class="hl num">10</span><span class="hl opt">)</span>
+                <span class="hl opt">{</span>
+                    DialogResult choosenbutton <span class="hl opt">=</span> MessageBox<span class="hl opt">.</span><span class="hl kwd">Show</span><span class="hl opt">(</span><span class="hl str">&quot;Do you want to play again?&quot;</span><span class="hl opt">,</span> <span class="hl str">&quot;Game Ended&quot;</span><span class="hl opt">,</span> MessageBoxButtons<span class="hl opt">.</span>YesNo<span class="hl opt">);</span>
+                    <span class="hl kwa">if</span> <span class="hl opt">(</span>choosenbutton <span class="hl opt">==</span> DialogResult<span class="hl opt">.</span>Yes<span class="hl opt">)</span>
+                        Application<span class="hl opt">.</span><span class="hl kwd">Restart</span><span class="hl opt">();</span>
+                    <span class="hl kwa">else</span>
+                        Application<span class="hl opt">.</span><span class="hl kwd">Exit</span><span class="hl opt">();</span>
+                <span class="hl opt">}</span>
+            <span class="hl opt">}</span>
+        <span class="hl opt">}</span>
+
+        <span class="hl kwa">private</span> <span class="hl kwb">void</span> <span class="hl kwd">comboBox1_SelectedIndexChanged</span><span class="hl opt">(</span><span class="hl kwb">object</span> sender<span class="hl opt">,</span> EventArgs e<span class="hl opt">)</span>
+        <span class="hl opt">{</span>
+            
+            <span class="hl kwa">if</span> <span class="hl opt">(</span>comboBox1<span class="hl opt">.</span>Text <span class="hl opt">==</span> <span class="hl str">&quot;Paper&quot;</span><span class="hl opt">)</span>
+            <span class="hl opt">{</span> 
+              Paper1<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">true</span><span class="hl opt">;</span>
+              Scissor1<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+              Rock1<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+              player <span class="hl opt">=</span> <span class="hl num">0</span><span class="hl opt">;</span>
+            <span class="hl opt">}</span>
+           <span class="hl kwa">if</span> <span class="hl opt">(</span>comboBox1<span class="hl opt">.</span>Text <span class="hl opt">==</span> <span class="hl str">&quot;Scissor&quot;</span><span class="hl opt">)</span>
+           <span class="hl opt">{</span>
+               Paper1<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+               Scissor1<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">true</span><span class="hl opt">;</span>
+               Rock1<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+               player <span class="hl opt">=</span> <span class="hl num">1</span><span class="hl opt">;</span>
+           <span class="hl opt">}</span>
+            <span class="hl kwa">if</span> <span class="hl opt">(</span>comboBox1<span class="hl opt">.</span>Text <span class="hl opt">==</span> <span class="hl str">&quot;Rock&quot;</span><span class="hl opt">)</span>
+            <span class="hl opt">{</span>
+                Paper1<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+                Scissor1<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
+                Rock1<span class="hl opt">.</span>Visible <span class="hl opt">=</span> <span class="hl kwa">true</span><span class="hl opt">;</span>
+                player <span class="hl opt">=</span> <span class="hl num">2</span><span class="hl opt">;</span>
+            <span class="hl opt">}</span>
+          
+
+        <span class="hl opt">}</span>
+    <span class="hl opt">}</span>
+<span class="hl opt">}</span>
+</pre>
+</body>
+</html>
+<!--HTML generated by highlight 3.19, http://www.andre-simon.de/-->
